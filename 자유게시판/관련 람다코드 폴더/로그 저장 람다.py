@@ -71,7 +71,7 @@ def lambda_handler(event, context):
     
     file_directory = "test-loginputfolder/"        #파일이 저장될 경로이다. 공란이면 최상이 경로에 저장된다.
     file_fullpath = file_directory + file_name        #파일 경로와 파일 이름을 합쳐서 최종위치를 만든다.
-    result = upload_file_s3(bucket, file_fullpath + '.gz', file_content)
+    result = upload_file_s3(bucket, file_fullpath + '.gz', file_content)        #로그를 CloudWatch로 S3에 저장하였을때 .gz로 저장되었기에 .gz로 하였다.
     print(result)       #결과 확인용
 
 
