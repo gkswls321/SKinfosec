@@ -3,7 +3,7 @@ import json
 import boto3
 import datetime
 '''
-트리거로 CloudWatch Logs를 추가해야한다.
+람다 트리거로 CloudWatch Logs를 추가해야한다.
 '''
 
 
