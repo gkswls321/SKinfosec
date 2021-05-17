@@ -2,7 +2,9 @@ import base64
 import json
 import boto3
 import datetime
-
+'''
+트리거로 CloudWatch Logs를 추가해야한다.
+'''
 
 
 def upload_file_s3(bucket, file_name, file):        #버킷에 쓰기위한 관련 값들을 받아오는 사용자 정의 함수
