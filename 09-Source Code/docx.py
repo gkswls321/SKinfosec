@@ -1,9 +1,9 @@
-# 할 수 있는 것
-# 1. word파일 생성
+# 해야하는 것
+# 1. word파일 생성 -- O
 # 2. txt파일 읽고 그 내용 word파일에 입력
-# 3. 이미지를 word파일에 삽입
-# 4. word파일의 폰트, 기울기, size , bold 등 적용 가능
-# 5. word파일을 원하는 경로에 저장
+# 3. 이미지를 word파일에 삽입 -- 0
+# 4. word파일의 폰트, 기울기, size , bold 등 적용 가능 -- 0
+# 5. word파일을 원하는 경로에 저장 -- 0 
 
 import datetime
 import docx
