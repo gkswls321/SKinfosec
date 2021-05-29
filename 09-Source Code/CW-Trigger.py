@@ -1,11 +1,12 @@
+'''
+CloudWatch가 Trigger 될 때 마다 Lambda 실행
+'''
+
+
 import base64
 import json
 import boto3
 import datetime
-
-'''
-람다 트리거로 CloudWatch Logs를 추가해야한다.
-'''
 
 # bucket에 로그 파일을 업로드하기 위한 함수
 def upload_file_s3(bucket, file_name, file):
