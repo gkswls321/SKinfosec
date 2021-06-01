@@ -21,6 +21,8 @@ with gzip.open(path, 'rb') as frb:
     f_out.close()
 
 
+# 궁금증 : json 데이터는 type함수 치면 json으로 뜨나? -> 안 뜨는 걸로 생각됨..
+
 with open('./log_test.txt','r') as j_file : 
     json_data = json.load(j_file)
     print(type(json_data)) # 이거 dic
@@ -29,7 +31,7 @@ with open('./log_test.txt','r') as j_file :
 
     json_data_event = json_data['logEvents'][1]['message']
     print('##########',json_data_event,'############', sep='\n')
-    print(type(json_data_event)) # 이거 왜 str임?????  
+    print(type(json_data_event)) #  str임
 
     print(json_data.keys())
     print(json_data.get('logEvents'))
