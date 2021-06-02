@@ -21,7 +21,7 @@ path = 'C:/Users/dolif/Desktop/프로젝트/log'
 # -------------
 # 리스트 미리 생성 
 mysqllog_path_list = []
-mysqllog_data_list = [] # mysql 데이터를 담은 리스트 생성
+mysqllog_data_list = [] # mysql 데이터를 담을 리스트 생성
 
 # lambdalog_path_list = []
 # lambdalog_data_list = []
