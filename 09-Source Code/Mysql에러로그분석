@@ -16,7 +16,7 @@ mysql_path = 'C:/Users/dolif/Desktop/프로젝트/log/mysqllog/2021/5/29/46d4769
 # with gzip.open(path,'rb') as rb_lambda: # 람다 로그 읽기
 #     print(rb_lambda.readlines())
 
-# with gzip.open(ct_path,'rb') as ct_lambda:   # 이거 너무 길어.. 파이썬으로 보기 너무 힘듬
+# with gzip.open(ct_path,'rb') as ct_lambda:   # 클라우드 트레일 로그.. 이거 너무 길어.. 파이썬으로 보기 너무 힘듬
 #     print(ct_lambda.readlines())
 
 
