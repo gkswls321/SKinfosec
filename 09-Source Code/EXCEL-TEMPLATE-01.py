@@ -25,29 +25,12 @@ sheet2 = wb.create_sheet("APACHE_WEB_REPORT", 1) # sheet_2가 2번째 시트에 
 sheet3 = wb.create_sheet("MYSQL_REPORT", 2)
 sheet4 = wb.create_sheet("CLOUD TRAIL_REPORT", 3)
 
-# make title ---
-def make_title(a):
-    SHEET_border = Border(left=Side(border_style='thick', color='000000'), 
-            right=Side(border_style='thick', color='000000'),
-			top=Side(border_style='thick', color='000000'),
-			bottom=Side(border_style='thick', color='000000')) 
-    
-    a.merge_cells('A1:G1')
-    a['A1'] = 'EVENTSHOP REPORT'
-    a['A1'].font = Font(size=40,bold=True)
-    # a['A1:G1'].border = SHEET_border
-
-make_title(sheet1)
-make_title(sheet2)
-make_title(sheet3)
-make_title(sheet4)
-
 # insert graph
-def insert_image(a,img):
-    img.anchor = 'A4'
+def insert_image(a,img,b,c,d):
+    img.anchor = d
 
-    unit_cm= 12
-    unit_cm2 = 16
+    unit_cm= b
+    unit_cm2 = c
 
     unit_inch= round((unit_cm/2.54)*10,0)#  change to float
     unit_inch= round((unit_cm/2.54)*100)  #  change to integer
@@ -59,30 +42,51 @@ def insert_image(a,img):
     img.width = unit_inch2
     a.add_image(img)
 
+
+# make title ---
+def make_title(a):
+    SHEET_border = Border(left=Side(border_style='thick', color='000000'), 
+            right=Side(border_style='thick', color='000000'),
+			top=Side(border_style='thick', color='000000'),
+			bottom=Side(border_style='thick', color='000000')) 
+    
+    a.merge_cells('A1:H1')
+    a['A1'] = 'EVENTSHOP REPORT'
+    a['A1'].font = Font(size=40,bold=True)
+    a['A2'] = 'Today : ' 
+    a['b2'] = nowDate
+
+    insert_image(a,openpyxl.drawing.image.Image('C:/Users/dolif/Desktop/프로젝트/adt.png'),2,4,'g2')
+    # a['A1:G1'].border = SHEET_border
+
+make_title(sheet1)  
+make_title(sheet2)
+make_title(sheet3)
+make_title(sheet4)
+
+
 # insert_image(sheet1,openpyxl.drawing.image.Image('C:/Users/dolif/Desktop/프로젝트/{0}-{1}_apache_web_graph.png'.format(nowDate,nowTime)))
 
-insert_image(sheet2,openpyxl.drawing.image.Image('C:/Users/dolif/Desktop/프로젝트/{0}-{1}_apache_web_graph.png'.format(nowDate,nowTime)))
+insert_image(sheet2,openpyxl.drawing.image.Image('C:/Users/dolif/Desktop/프로젝트/{0}-{1}_apache_web_graph.png'.format(nowDate,nowTime)),12,16,'a6')
 
-# insert_image(sheet3,openpyxl.drawing.image.Image('C:/Users/dolif/Desktop/프로젝트/{0}-{1}_apache_web_graph.png'.format(nowDate,nowTime)))
+# insert_image(sheet3,openpyxl.drawing.image.Image('C:/Users/dolif/Desktop/프로젝트/{0}-{1}_apache_web_graph.png'.format(nowDate,nowTime)),12,16,'a6')
 
-# insert_image(sheet4,openpyxl.drawing.image.Image('C:/Users/dolif/Desktop/프로젝트/{0}-{1}_apache_web_graph.png'.format(nowDate,nowTime)))
+# insert_image(sheet4,openpyxl.drawing.image.Image('C:/Users/dolif/Desktop/프로젝트/{0}-{1}_apache_web_graph.png'.format(nowDate,nowTime)),12,16,'a6')
 
 # sheet1.append(['first','second']) # A1 -> A2 마지막 행에 이어서 추가
 
 
 #-------- A30부터 원하는 내용추가하기 # LIST 내용 넣기
 ap_x_values # x축
-ap_x_values1 = len(ap_x_values)
 ap_values # y축
 
-# for i in range(1,len(ap_values)):
-#     for j in range(ap_x_values1):
-#         sheet2.cell(28,i).value = ap_x_values[j]
-#         sheet2.cell(29,i).value = ap_values[j]    
+for i in range(len(ap_x_values)):
+    sheet2.cell(30, column = 1 + i, value = ap_x_values[i])
+    sheet2.cell(31, column = 1 + i, value= ap_values[i])
 
 ft = Font(name='Arial', size=25,bold=True, italic=True, strikethrough = True, underline='single')
-sheet1['A2'] = 'HI'
-sheet1['A2'].font = ft
+# sheet1['A2'] = 'HI'
+# sheet1['A2'].font = ft
 
 # sheet1['C1'] = 'merge cells' # 병합된 셀에 값을 넣을 땐 첫번째 셀을 기준으로
 # sheet1['C1'].font = Font(name='Arial',size=20)
@@ -93,4 +97,5 @@ filepath = 'C:/Users/dolif/Desktop/프로젝트/{0}-{1}_excel_report.xlsx'.forma
 wb.save(filepath) # 
 
 print('------','complete','----------',sep='\n')
+
 
