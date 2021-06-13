@@ -6,16 +6,28 @@ from openpyxl.styles import Font, Color, Alignment, Border, Side
 
 # import sys
 # sys.path.append('C:/Users/dolif/Desktop/프로젝트/excel') 
-from apache2_loggraph import ap_x_values, ap_values
-from mysql_loggraph import mysql_Warning
-from WEB1_net_max_loggraph import net_time_data2
-from WEB2_net_max_loggraph import net2_time_data2
-from WEB1_cpu_max_loggraph import cpu_time_data2
-from WEB2_cpu_max_loggraph import cpu2_time_data2
+
+# from apache2_loggraph import ap_x_values, ap_values
+# from mysql_loggraph import mysql_Warning
+# from WEB1_net_max_loggraph import net_time_data2
+# from WEB2_net_max_loggraph import net2_time_data2
+# from WEB1_cpu_max_loggraph import cpu_time_data2
+# from WEB2_cpu_max_loggraph import cpu2_time_data2
+
+
+
+import apache2_loggraph 
+# from apache2_loggraph import ap_x_values, ap_values
+import mysql_loggraph
+import WEB1_net_max_loggraph
+import WEB2_net_max_loggraph
+import WEB1_cpu_max_loggraph
+import WEB2_cpu_max_loggraph
+
 
 # -- DATE ------------
-# 현재 날짜에 대한 정보를 담은 변수
-today = date.today()
+
+today = date.today()        # 현재 날짜에 대한 정보를 담은 변수
 
 today_y = today.year
 today_m = today.month
@@ -36,6 +48,7 @@ sheet3 = wb.create_sheet("MYSQL_ERROR_REPORT", 2)
 
 
 # insert graph
+# 
 def insert_image(a,img,b,c,d):
     img.anchor = d
 
@@ -69,26 +82,34 @@ make_title(sheet1)
 make_title(sheet2)
 make_title(sheet3)
 
+
+WEB1_cpu_max_loggraph.draw_graph()
 insert_image(sheet1,openpyxl.drawing.image.Image('./{0}-{1}_WEB1_CPU_MAX_graph.png'.format(nowDate,nowTime)),9,15,'A6')
 
+WEB2_cpu_max_loggraph.draw_graph()
 insert_image(sheet1,openpyxl.drawing.image.Image('./{0}-{1}_WEB2_CPU_MAX_graph.png'.format(nowDate,nowTime)),9,15,'A22')
 
+WEB1_net_max_loggraph.draw_graph()
 insert_image(sheet1,openpyxl.drawing.image.Image('./{0}-{1}_WEB1_NET_MAX_graph.png'.format(nowDate,nowTime)),9,15,'J6')
 
+WEB2_net_max_loggraph.draw_graph()
 insert_image(sheet1,openpyxl.drawing.image.Image('./{0}-{1}_WEB2_NET_MAX_graph.png'.format(nowDate,nowTime)),9,15,'J22')
 
+
+
+
+ap_x_values, ap_values = apache2_loggraph.draw_graph()
+for i in range(len(ap_x_values)):
+    sheet2.cell(30, column = 1 + i, value = ap_x_values[i])
+    sheet2.cell(31, column = 1 + i, value= ap_values[i])
 insert_image(sheet2,openpyxl.drawing.image.Image('./{0}-{1}_apache_web_graph.png'.format(nowDate,nowTime)),12,16,'A6')
 
+mysql_loggraph.draw_graph()
 insert_image(sheet3,openpyxl.drawing.image.Image('./{0}-{1}_MYSQL_ERROR_TYPE_graph.png'.format(nowDate,nowTime)),14,20,'A6')
 
 #-------- INSERT WANT DATE TO A30 
 # INSERT LIST DATA!
-ap_x_values # x
-ap_values # y
 
-for i in range(len(ap_x_values)):
-    sheet2.cell(30, column = 1 + i, value = ap_x_values[i])
-    sheet2.cell(31, column = 1 + i, value= ap_values[i])
 
 # for i in range(len(mysql_Warning)):
 #     sheet3.cell(36+i , column = 1, value= mysql_Warning[i])

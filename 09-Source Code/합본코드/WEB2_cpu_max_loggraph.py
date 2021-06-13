@@ -7,47 +7,50 @@ import numpy as np
 from datetime import date
 import datetime
 
-# date -----------------------------------
-today = date.today()
 
-now = datetime.datetime.now()
-nowDate = str(now.strftime('%Y-%m-%d'))
-nowTime = str(now.strftime('%H'))
 
-# path -----------------------------------
-path = './cwEC2logtest_CPUmax_web2.txt'
+def draw_graph():
+    # date -----------------------------------
+    today = date.today()
 
-# read -----------------------------------
-with open(path,'r') as j_file : 
-    cpu_json_data = json.load(j_file)
-    print(type(cpu_json_data), '\n\n') ## dic type
-    # print(cpu_json_data,'\n\n\n')
+    now = datetime.datetime.now()
+    nowDate = str(now.strftime('%Y-%m-%d'))
+    nowTime = str(now.strftime('%H'))
 
-cpu_json_data2 = cpu_json_data['Datapoints']
+    # path -----------------------------------
+    path = './cwEC2logtest_CPUmax_web2.txt'
 
-cpu_time_data = []
-cpu_max_data = []
+    # read -----------------------------------
+    with open(path,'r') as j_file : 
+        cpu_json_data = json.load(j_file)
+        print(type(cpu_json_data), '\n\n') ## dic type
+        # print(cpu_json_data,'\n\n\n')
 
-for i in range(len(cpu_json_data2)):
-    cpu_time_data.append(cpu_json_data2[i]['Timestamp'])
-    cpu_max_data.append(cpu_json_data2[i]['Maximum'])
+    cpu_json_data2 = cpu_json_data['Datapoints']
 
-# time - hh
-# print(len(cpu_time_data))
-# print(cpu_time_data[0])
+    cpu_time_data = []
+    cpu_max_data = []
 
-cpu2_time_data2 = []
+    for i in range(len(cpu_json_data2)):
+        cpu_time_data.append(cpu_json_data2[i]['Timestamp'])
+        cpu_max_data.append(cpu_json_data2[i]['Maximum'])
 
-for i in range(len(cpu_time_data)):
-    Z_NUM = cpu_time_data[0].find('T') + 1
-    Z_NUM2 = Z_NUM + 2
-    ec2_cpu_2_split_t = cpu_time_data[i][Z_NUM:Z_NUM2] # 
-    cpu2_time_data2.append(int(ec2_cpu_2_split_t))
+    # time - hh
+    # print(len(cpu_time_data))
+    # print(cpu_time_data[0])
 
-# graph
-plt.bar(cpu2_time_data2 ,cpu_max_data,width=0.7,color = 'green')
-plt.xlabel('TIME')
-plt.ylabel("CPU-MAX")
-plt.title('WEB2_CPU-MAX_GRAPH')
-plt.savefig('./{0}-{1}_WEB2_CPU_MAX_graph.png'.format(nowDate,nowTime),dpi=300)
-# plt.show()
+    cpu2_time_data2 = []
+
+    for i in range(len(cpu_time_data)):
+        Z_NUM = cpu_time_data[0].find('T') + 1
+        Z_NUM2 = Z_NUM + 2
+        ec2_cpu_2_split_t = cpu_time_data[i][Z_NUM:Z_NUM2] # 
+        cpu2_time_data2.append(int(ec2_cpu_2_split_t))
+
+    # graph
+    plt.bar(cpu2_time_data2 ,cpu_max_data,width=0.7,color = 'green')
+    plt.xlabel('TIME')
+    plt.ylabel("CPU-MAX")
+    plt.title('WEB2_CPU-MAX_GRAPH')
+    plt.savefig('./{0}-{1}_WEB2_CPU_MAX_graph.png'.format(nowDate,nowTime),dpi=300)
+    # plt.show()
